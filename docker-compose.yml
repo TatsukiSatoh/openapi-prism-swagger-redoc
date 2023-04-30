@@ -13,9 +13,10 @@ services:
     ports:
       - "3031:8080"
   redoc:
-    build:
-      context: .
-      dockerfile: redoc/Dockerfile
-    platform: linux/arm64
+    image: redocly/redoc
+    environment:
+      - SPEC_URL=/openapi/openapi.yml
+    volumes:
+      - ./openapi.yml:/usr/share/nginx/html/openapi/openapi.yml
     ports:
       - "3032:80"
