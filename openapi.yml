@@ -1,0 +1,44 @@
+openapi: 3.0.0
+info:
+  title: Simple User API
+  description: A simple API to retrieve user information.
+  version: 1.0.0
+
+paths:
+  /users/{userId}:
+    get:
+      summary: Retrieve user information by ID
+      description: Retrieve user information by providing a unique user ID.
+      parameters:
+        - name: userId
+          in: path
+          description: The unique identifier of the user.
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        "200":
+          description: User information retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    format: int64
+                  name:
+                    type: string
+                  email:
+                    type: string
+                    format: email
+        "404":
+          description: User not found.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string

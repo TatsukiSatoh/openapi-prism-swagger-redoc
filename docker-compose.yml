@@ -1,0 +1,21 @@
+version: "3"
+services:
+  prism:
+    build: .
+    ports:
+      - "3030:3030"
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    environment:
+      - SWAGGER_JSON=/openapi/openapi.yml
+    volumes:
+      - ./openapi.yml:/openapi/openapi.yml
+    ports:
+      - "3031:8080"
+  redoc:
+    build:
+      context: .
+      dockerfile: redoc/Dockerfile
+    platform: linux/arm64
+    ports:
+      - "3032:80"
